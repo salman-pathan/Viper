@@ -1,0 +1,22 @@
+{
+  "name": "viper",
+  "description": "A Desktop application to convert WebP images to JPEG",
+  "main": "main.js",
+  "authors": [
+    "Salman Khan <salmanpathan30@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/salman-pathan/Viper",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.0.0"
+  }
+}
