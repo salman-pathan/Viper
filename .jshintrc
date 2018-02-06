@@ -1,0 +1,8 @@
+{
+    "esversion": 6,
+    "eqeqeq": true,
+    "curly": true,
+    "maxdepth": 2,
+    "maxparams": 3,
+    "unused": true
+}
