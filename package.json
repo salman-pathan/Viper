@@ -1,15 +1,17 @@
 {
-  "name": "Viper",
+  "name": "viper",
   "version": "0.0.1",
   "description": "",
   "main": "main.js",
   "scripts": {
+    "start":"main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "1.7.12"
+    "electron": "1.7.12",
+    "jshint": "^2.9.5"
   }
 }
