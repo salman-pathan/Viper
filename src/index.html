@@ -1,12 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Codiodes - WebP Converter</title>
 </head>
-<body>
-    <div class="container"></div>
+
+<body class="background">
+    <div class="container">
+
+        <form id="inputForm">
+            <div class="form-group">
+                <button class="btn btn-primary" id="selectFileButton">Select WebP Image File</button>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" id="selectFolderButton">Select Destination Folder</button>
+            </div>
+            <button type="submit" class="btn btn-primary" id="convertButton">Convert</button>
+        </form>
+    </div>
+
+    <script>
+        const ipc = require('electron').ipcRenderer;
+        
+        const selectFileButton = document.querySelector('#selectFileButton').addEventListener('click', () => {
+            ipc.send('onClickSelectFile');
+        });
+
+        const selectFolderButton = document.querySelector('#selectFolderButton').addEventListener('click', () => {
+            ipc.send('onClickSelectFolder');
+        });
+
+        const convertButton = document.querySelector('#convertButton').addEventListener('click', () => {
+            ipc.send('onClickConvert');
+        });
+    </script>
 </body>
 </html>

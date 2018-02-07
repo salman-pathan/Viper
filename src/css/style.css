@@ -1,0 +1,26 @@
+
+
+.background {
+    background-color: #343F4B;
+}
+
+.background-secondary {
+    background-color: #1F2D3D;
+}
+
+.foreground-primary {
+    color: #FFFFFF;
+}
+
+.heading {
+    margin: 0 auto;
+    padding: 15px;
+}
+
+#inputForm {
+    margin-top: 50px;
+}
+
+.primary-text {
+    color: #FFFFFF;
+}
