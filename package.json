@@ -11,7 +11,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "1.7.12",
     "jshint": "^2.9.5"
+  },
+  "dependencies": {
+    "electron": "^1.8.2"
   }
 }
