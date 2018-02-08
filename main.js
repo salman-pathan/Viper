@@ -12,7 +12,7 @@ let win;
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({width: 800, height: 400});
+  win = new BrowserWindow({width: 800, height: 350});
 
   // and load the index.html of the app.
   win.loadURL(url.format({
@@ -75,6 +75,7 @@ Menu.setApplicationMenu(appMenu);
 
 ipcMain.on('onClickSelectFile', () => {
   const callback = (data) => {
+    console.log(JSON.stringify(data));
     console.log('onClickSelectFileResult: ' + data);
     sourceFilePath = data;
   };
@@ -82,7 +83,7 @@ ipcMain.on('onClickSelectFile', () => {
     filters: [
       {name: 'WebP Image', extensions: ['webp']}
     ],
-    properties: ['openFile']
+    properties: ['openFile', 'multiSelections']
   };
   dialog.showOpenDialog(options, callback);
 });
@@ -90,7 +91,7 @@ ipcMain.on('onClickSelectFile', () => {
 ipcMain.on('onClickSelectFolder', () => {
   const callback = (data) => {
     console.log('onClickSelectFolderResult' + data);
-    destinationFolder = data+"/unnamed.jpg";
+    destinationFolder = data;
   };
   const options = {
     properties: ['openDirectory']
@@ -109,18 +110,40 @@ ipcMain.on('onClickConvert', () => {
     return;
   }
 
-  webp.dwebp(sourceFilePath, destinationFolder+'/convertedFile.jpg', '-o', (status) => {
-    console.log('Conversion Status: ' + status);
-    if (status === 100) {
-      let options = {
-        title: 'Success',
-        message: 'Conversion Successful!'
-      };
-      dialog.showMessageBox({options: options});
-      sourceFilePath = null;
-      destinationFolder = null;
-      return;
-    }
-    dialog.showErrorBox('Error', 'Conversion Unsuccessful!');
-  });
+  // sourceFilePath.forEach((filePath) => {
+  //   let fileName = getFileName(filePath);
+  //   console.log(fileName);
+  //   webp.dwebp(sourceFilePath, destinationFolder+fileName, '-o', (status) => {
+  //     console.log(status);
+  //     debug;
+  //   });
+  // });
+
+  for(let i=0; i<sourceFilePath.length; i++) {
+    let fileName = getFileName(sourceFilePath[i]);
+    console.log(fileName);
+    webp.dwebp(sourceFilePath[i], destinationFolder+ path.sep +fileName, '-o', (status) => {
+      console.log(status);
+    });
+  }
+
+  // webp.dwebp(sourceFilePath, destinationFolder+'/convertedFile.jpg', '-o', (status) => {
+  //   if (parseInt(status) === 100) {
+  //     let options = {
+  //       title: 'Success',
+  //       message: 'Conversion Successful!'
+  //     };
+  //     dialog.showMessageBox(options);
+  //     sourceFilePath = null;
+  //     destinationFolder = null;
+  //   } 
+  //   if (status === '101') {
+  //     dialog.showErrorBox('Error', 'Conversion Unsuccessful!');
+  //   }
+  // });
 });
+
+function getFileName(filePath) {
+  let escapedFilePath = filePath.replace(/(\s+)/g, '\\$1');
+  return escapedFilePath.replace(/^.*[\\\/]/, '')+'.jpg';
+}

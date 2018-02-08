@@ -22,5 +22,9 @@
 }
 
 .primary-text {
-    color: #FFFFFF;
+    color: #FFFFFF !important;
+}
+
+.warning-text {
+    margin-top: 20px;
 }
