@@ -1,2 +1,4 @@
 node_modules/*
 libs/*
+Viper-win32-x64/*
+.vscode/*
